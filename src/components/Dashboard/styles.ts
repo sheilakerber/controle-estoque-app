@@ -7,6 +7,7 @@ export const Container = styled.main`
     background: var(--lightPurple);
     width: 90%;
     border-radius: 0.7rem;
+    border: 1px solid var(--darkPurple);
 
     h1 {
         display: block;

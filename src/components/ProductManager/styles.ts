@@ -22,7 +22,8 @@ export const Container = styled.div`
     .selectProdut {
         background: var(--lightPurple);
         display: block;
-
+        border: 1px solid var(--darkPurple);
+        
         h1 {
             font-weight: lighter;
             font-size: 1rem;
