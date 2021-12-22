@@ -3,6 +3,7 @@ import { Container } from './styles'
 import saveImg from '../../assets/save.jpg'
 import cancelImg from '../../assets/cancel.jpg'
 import deleteImg from '../../assets/delete.png'
+import closeImg from "../../assets/close.svg"
 
 interface newEditProductModalProps {
     isOpen: boolean;
@@ -17,6 +18,14 @@ export function NewEditProductModal( {isOpen, onRequestClose}: newEditProductMod
             overlayClassName="react-modal-overlay"
             className="react-modal-content"
        >  
+
+       <button
+            type="button"
+            onClick={onRequestClose}
+            className='react-modal-close'>
+            <img src={closeImg} alt="Fechar modal" />
+       </button>
+
             <Container>
                 <header>
                     <h2>Editar produto</h2>
