@@ -6,6 +6,7 @@ import { ProductManager } from './components/ProductManager';
 import { GlobalStyle } from './styles/globals';
 import { useState } from 'react';
 import { NewRegisterProductModal } from './components/NewRegisterProductModal';
+import { NewEditProductModal } from './components/NewEditProductModal';
 
 Modal.setAppElement('#root');
 
@@ -22,15 +23,29 @@ export function App() {
         setIsRegisterProductModalOpen(false)
     }
 
+  // modal EDITAR PRODUTO
+  const [ isNewEditProductModalOpen, setIsNewEditProductModalOpen ] = useState(false)
+    function handleOpenEditProductModal(){
+      setIsNewEditProductModalOpen(true)
+    }
+
+    function handleCloseEditProductModal() {
+      setIsNewEditProductModalOpen(false)
+    }
+
   return (
     <>
       <Header/>
       
       <Dashboard/>
-      <ProductManager onOpenRegisterProductModal={handleOpenRegisterProductModal} />
+      <ProductManager onOpenRegisterProductModal={handleOpenRegisterProductModal} onOpenEditProductModal={handleOpenEditProductModal} />
       <NewRegisterProductModal 
         isOpen={isRegisterProductModalOpen}
         onRequestClose={handleCloseRegisterProductModal}
+      />
+      <NewEditProductModal 
+        isOpen={isNewEditProductModalOpen}
+        onRequestClose={handleCloseEditProductModal}
       />
       <GlobalStyle />
     </>

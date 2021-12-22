@@ -7,9 +7,10 @@ import Modal from 'react-modal'
 
 interface ProductManagerProps {
     onOpenRegisterProductModal: () => void;
+    onOpenEditProductModal: () => void;
 }
 
-export function ProductManager( { onOpenRegisterProductModal }: ProductManagerProps) {
+export function ProductManager( { onOpenRegisterProductModal, onOpenEditProductModal }: ProductManagerProps)  {
     return (
         <Container>
             <div className="">
@@ -20,7 +21,7 @@ export function ProductManager( { onOpenRegisterProductModal }: ProductManagerPr
                         <option value="">produto 2</option>
                     </select>
 
-                    <button>
+                    <button type="button" onClick={onOpenEditProductModal} >
                         <h2>Editar produto</h2>
                         <img src={editProductImg} alt="Imagem para Editar Produto" />
                     </button>
@@ -54,5 +55,4 @@ export function ProductManager( { onOpenRegisterProductModal }: ProductManagerPr
             
         </Container>
     )
-
 }
