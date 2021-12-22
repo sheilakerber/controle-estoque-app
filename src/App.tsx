@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { ProductManager } from './components/ProductManager';
 import { GlobalStyle } from './styles/globals';
 import { useState } from 'react';
+import { NewRegisterProductModal } from './components/NewRegisterProductModal';
 
 Modal.setAppElement('#root');
 
@@ -21,21 +22,16 @@ export function App() {
         setIsRegisterProductModalOpen(false)
     }
 
-
   return (
     <>
       <Header/>
       
       <Dashboard/>
       <ProductManager onOpenRegisterProductModal={handleOpenRegisterProductModal} />
-
-      <Modal
+      <NewRegisterProductModal 
         isOpen={isRegisterProductModalOpen}
-        onRequestClose={handleCloseRegisterProductModal}>
-                
-        <h2>meu modal!</h2>
-      </Modal>
-
+        onRequestClose={handleCloseRegisterProductModal}
+      />
       <GlobalStyle />
     </>
   );
