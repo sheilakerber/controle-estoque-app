@@ -4,7 +4,7 @@ import saveImg from '../../assets/save.jpg'
 import cancelImg from '../../assets/cancel.jpg'
 import closeImg from "../../assets/close.svg"
 import { FormEvent, useEffect, useState } from 'react'
-//import { api } from '../../services/api'
+import { api } from '../../services/api'
 
 interface newRegisterNewProductModalProps {
     isOpen: boolean;
@@ -13,9 +13,8 @@ interface newRegisterNewProductModalProps {
 
 export function NewRegisterProductModal( {isOpen, onRequestClose}: newRegisterNewProductModalProps ){
     useEffect(() => {
-        fetch('http://localhost:3000/api/products')
-        .then(response => response.json())
-        .then(data => console.log(data))
+        api.get('/products')
+        .then(response => console.log(response.data))
     }, [])
     
     const [product, setProduct] = useState('')
