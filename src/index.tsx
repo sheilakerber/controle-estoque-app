@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App'
 import { createServer } from 'miragejs'
+import { json } from 'stream/consumers';
 
 createServer({
   routes() {
@@ -14,6 +15,12 @@ createServer({
           product: 'produtoTeste'
         } 
       ]
+    })
+
+    this.post('/products', (schema, request) => {
+      const data = JSON.parse(request.requestBody)
+
+      return data
     })
   }
 })

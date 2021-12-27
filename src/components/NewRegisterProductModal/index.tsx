@@ -25,6 +25,8 @@ export function NewRegisterProductModal( {isOpen, onRequestClose}: newRegisterNe
         const data = {
             product
         }
+
+        api.post('/products', data)
     }
     
     return (
