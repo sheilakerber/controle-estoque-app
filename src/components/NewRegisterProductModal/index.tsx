@@ -3,6 +3,8 @@ import { Container } from './styles'
 import saveImg from '../../assets/save.jpg'
 import cancelImg from '../../assets/cancel.jpg'
 import closeImg from "../../assets/close.svg"
+import { FormEvent, useEffect, useState } from 'react'
+//import { api } from '../../services/api'
 
 interface newRegisterNewProductModalProps {
     isOpen: boolean;
@@ -10,6 +12,22 @@ interface newRegisterNewProductModalProps {
 }
 
 export function NewRegisterProductModal( {isOpen, onRequestClose}: newRegisterNewProductModalProps ){
+    useEffect(() => {
+        fetch('http://localhost:3000/api/products')
+        .then(response => response.json())
+        .then(data => console.log(data))
+    }, [])
+    
+    const [product, setProduct] = useState('')
+    
+    function handleRegisterNewProduct(event: FormEvent) {
+        event.preventDefault()
+
+        const data = {
+            product
+        }
+    }
+    
     return (
         <Modal
         isOpen={isOpen}
@@ -25,9 +43,14 @@ export function NewRegisterProductModal( {isOpen, onRequestClose}: newRegisterNe
             <img src={closeImg} alt="Fechar modal" />
        </button>
 
-            <Container>
+            <Container onSubmit={handleRegisterNewProduct}>
                 <h2>Cadastro de produto no sistema</h2>
-                <input type="text" placeholder='Novo produto'/>
+                <input
+                    type="text"
+                    placeholder='Novo produto'
+                    value={product}
+                    onChange={event => setProduct(event.target.value)}
+                />
                 <div className='buttonsDiv'>
                     <button type="submit" id="saveBtn" >
                         <img src={saveImg} alt="" />
