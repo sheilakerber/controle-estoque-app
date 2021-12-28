@@ -1,26 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App'
-import { createServer } from 'miragejs'
-import { json } from 'stream/consumers';
+import { createServer, Model } from 'miragejs'
 
 createServer({
+
+  models: {
+    product: Model,
+  },
+
+  seeds(server) {
+    server.db.loadData({
+      products: [
+        {
+          id: 1,
+          product: 'produto teste 1'
+        },
+        {
+          id: 2,
+          product: 'produto teste 2'
+        },
+        {
+          id: 3,
+          product: 'produto teste 3'
+        }
+      ]
+    })
+  },
+
   routes() {
     this.namespace = 'api'
 
     this.get('/products', () => {
-      return [
-        {
-          id: 1,
-          product: 'produtoTeste'
-        } 
-      ]
+      return this.schema.all('product')
     })
 
     this.post('/products', (schema, request) => {
       const data = JSON.parse(request.requestBody)
-
-      return data
+      return schema.create('product', data)
     })
   }
 })
