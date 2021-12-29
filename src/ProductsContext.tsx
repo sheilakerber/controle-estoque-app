@@ -24,7 +24,6 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
   return (
     <ProductsContext.Provider value={{products, setProducts}}>
       {children}
-      {console.log("qwe", products)}
     </ProductsContext.Provider>
   );
 }

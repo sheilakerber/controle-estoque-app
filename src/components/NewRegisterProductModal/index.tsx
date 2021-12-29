@@ -22,7 +22,7 @@ export function NewRegisterProductModal({
   function handleRegisterNewProduct(event: FormEvent) {
     event.preventDefault();
 
-      if (context) {
+    if (context) {
       const newProductObject = {
         id: Math.floor(Math.random() * 10000),
         product,
@@ -56,17 +56,30 @@ export function NewRegisterProductModal({
           placeholder="Novo produto"
           value={product}
           onChange={(event) => setProduct(event.target.value)}
+          required
         />
+
+        <main>
+          <div className="productInfo">
+            <h3>Entrada</h3>
+            <input type="number" name="" id="" required/> <br />
+            <h3>Saída</h3>
+            <input type="number" name="" id="" required/> <br />
+            <h3>Total em estoque</h3>
+            <input type="text" name="" id="" disabled /> <br />
+          </div>
+        </main>
+
         <div className="buttonsDiv">
           <button type="submit" id="saveBtn">
             <img src={saveImg} alt="" />
             Salvar
           </button>
 
-          <button type="submit" id="cancelBtn">
+          {/* <button type="submit" id="cancelBtn">
             <img src={cancelImg} alt="" />
             Cancelar
-          </button>
+          </button> */}
         </div>
       </Container>
     </Modal>

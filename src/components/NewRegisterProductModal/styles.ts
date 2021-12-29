@@ -3,6 +3,8 @@ import styled  from "styled-components";
 export const Container = styled.form`
     .buttonsDiv {
         display: flex;
+        text-align: center;
+        justify-content: center;
     }
     
     h2 {
