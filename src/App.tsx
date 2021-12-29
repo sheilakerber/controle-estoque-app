@@ -7,6 +7,7 @@ import { GlobalStyle } from "./styles/globals";
 import { useState } from "react";
 import { NewRegisterProductModal } from "./components/NewRegisterProductModal";
 import { NewEditProductModal } from "./components/NewEditProductModal";
+import { ProductsProvider } from "./ProductsContext";
 
 Modal.setAppElement("#root");
 
@@ -36,7 +37,7 @@ export function App() {
   }
 
   return (
-    <>
+    <ProductsProvider>
       <Header />
       <Dashboard />
       <ProductManager
@@ -52,6 +53,6 @@ export function App() {
         onRequestClose={handleCloseEditProductModal}
       />
       <GlobalStyle />
-    </>
+    </ProductsProvider>
   );
 }

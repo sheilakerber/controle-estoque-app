@@ -3,17 +3,12 @@ import { Container } from "./styles";
 import saveImg from "../../assets/save.jpg";
 import cancelImg from "../../assets/cancel.jpg";
 import closeImg from "../../assets/close.svg";
-import { FormEvent, useEffect, useState } from "react";
-import { api } from "../../services/api";
+import { FormEvent, useContext, useState } from "react";
+import { ProductsContext } from "../../ProductsContext";
 
 interface NewRegisterNewProductModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-}
-
-interface Product {
-  id: number;
-  product: string;
 }
 
 export function NewRegisterProductModal({
@@ -22,14 +17,21 @@ export function NewRegisterProductModal({
 }: NewRegisterNewProductModalProps) {
   const [product, setProduct] = useState("");
 
+  const context = useContext(ProductsContext);
+
   function handleRegisterNewProduct(event: FormEvent) {
     event.preventDefault();
-    const data = {
-      product,
-    };
 
-    api.post("/products", data);
-    onRequestClose()
+      if (context) {
+      const newProductObject = {
+        id: Math.floor(Math.random() * 10000),
+        product,
+      };
+
+      const newProducts = [...context.products, newProductObject];
+      context.setProducts(newProducts);
+    }
+    onRequestClose();
   }
 
   return (

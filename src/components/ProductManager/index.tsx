@@ -1,18 +1,9 @@
+import { useContext } from "react";
 import { Container } from "./styles";
 import editProductImg from "../../assets/edit.png";
 import registerProductImg from "../../assets/newProduct.png";
 import lowStockImg from "../../assets/danger.jpg";
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
-
-interface Product {
-  id: number;
-  product: string;
-}
-
-interface ProductsResponse {
-  products: Product[];
-}
+import { ProductsContext } from "../../ProductsContext";
 
 interface ProductManagerProps {
   onOpenRegisterProductModal: () => void;
@@ -20,18 +11,11 @@ interface ProductManagerProps {
 }
 
 export function ProductManager({
-  onOpenRegisterProductModal,
-  onOpenEditProductModal,
-}: ProductManagerProps) {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    const getProduct = async () => {
-      const { data } = await api.get<ProductsResponse>("products");
-      setProducts(data.products);
-    };
-    getProduct();
-  }, []);
+    onOpenRegisterProductModal,
+    onOpenEditProductModal,
+  }: ProductManagerProps) {
+  
+  const context = useContext(ProductsContext)  
 
   return (
     <Container>
@@ -39,9 +23,9 @@ export function ProductManager({
         <div className="selectProdut">
           <h1>Selecione o produto desejado</h1>
           <select id="productsDropdown">
-            {products.map((item) => (
+            {context?.products.map((item) => (
               <option value={item.product} key={item.id}>
-                {item.product}
+                {item.product}          
               </option>
             ))}
           </select>
@@ -77,5 +61,5 @@ export function ProductManager({
         </div>
       </div>
     </Container>
-  );
+  )
 }
