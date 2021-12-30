@@ -24,8 +24,8 @@ export function ProductManager({
           <h1>Selecione o produto desejado</h1>
           <select id="productsDropdown">
             {context?.products.map((item) => (
-              <option value={item.product} key={item.id}>
-                {item.product}          
+              <option value={item.productName} key={item.id}>
+                {item.productName}          
               </option>
             ))}
           </select>

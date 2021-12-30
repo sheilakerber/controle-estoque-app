@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import { Container } from "./styles";
 import saveImg from "../../assets/save.jpg";
-import cancelImg from "../../assets/cancel.jpg";
+//import cancelImg from "../../assets/cancel.jpg";
 import closeImg from "../../assets/close.svg";
 import { FormEvent, useContext, useState } from "react";
 import { ProductsContext } from "../../ProductsContext";
@@ -15,21 +15,36 @@ export function NewRegisterProductModal({
   isOpen,
   onRequestClose,
 }: NewRegisterNewProductModalProps) {
-  const [product, setProduct] = useState("");
+  const [productName, setProductName] = useState("");
+  const [incomeQuantity, setIncomeQuantity] = useState<number | undefined>();
+  const [outcomeQuantity, setOutcomeQuantity] = useState<number | undefined>();
 
   const context = useContext(ProductsContext);
+
+  const balanceQuantity =
+    incomeQuantity && outcomeQuantity
+      ? incomeQuantity - outcomeQuantity
+      : undefined;
 
   function handleRegisterNewProduct(event: FormEvent) {
     event.preventDefault();
 
     if (context) {
-      const newProductObject = {
-        id: Math.floor(Math.random() * 10000),
-        product,
-      };
+            
+      if (incomeQuantity && outcomeQuantity && balanceQuantity ) {
+        const newProductObject = {
+          id: Math.floor(Math.random() * 10000),
+          productName,
+          incomeQuantity,
+          outcomeQuantity,
+          balanceQuantity,
+        };
 
-      const newProducts = [...context.products, newProductObject];
-      context.setProducts(newProducts);
+        const newProducts = [...context.products, newProductObject];
+
+        context.setProducts(newProducts);
+      }
+
     }
     onRequestClose();
   }
@@ -54,19 +69,43 @@ export function NewRegisterProductModal({
         <input
           type="text"
           placeholder="Novo produto"
-          value={product}
-          onChange={(event) => setProduct(event.target.value)}
+          value={productName}
+          onChange={(event) => setProductName(event.target.value)}
           required
         />
 
         <main>
           <div className="productInfo">
             <h3>Entrada</h3>
-            <input type="number" name="" id="" required/> <br />
+            <input
+              type="number"
+              id="incomeValue"
+              value={incomeQuantity}
+              onChange={(event) =>
+                setIncomeQuantity(Number(event.target.value))
+              }
+              required
+            />{" "}
+            <br />
             <h3>Saída</h3>
-            <input type="number" name="" id="" required/> <br />
+            <input
+              type="number"
+              id="outcomeValue"
+              value={outcomeQuantity}
+              onChange={(event) =>
+                setOutcomeQuantity(Number(event.target.value))
+              }
+              required
+            />{" "}
+            <br />
             <h3>Total em estoque</h3>
-            <input type="text" name="" id="" disabled /> <br />
+            <input
+              type="text"
+              id="balanceValue"
+              value={balanceQuantity}
+              disabled
+            />{" "}
+            <br />
           </div>
         </main>
 
@@ -75,11 +114,6 @@ export function NewRegisterProductModal({
             <img src={saveImg} alt="" />
             Salvar
           </button>
-
-          {/* <button type="submit" id="cancelBtn">
-            <img src={cancelImg} alt="" />
-            Cancelar
-          </button> */}
         </div>
       </Container>
     </Modal>
