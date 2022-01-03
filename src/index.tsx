@@ -14,15 +14,15 @@ createServer({
       products: [
         {
           id: 1,
-          product: 'produto teste 1'
+          productName: 'produto teste 1'
         },
         {
           id: 2,
-          product: 'produto teste 2'
+          productName: 'produto teste 2'
         },
         {
           id: 3,
-          product: 'produto teste 3'
+          productName: 'produto teste 3'
         }
       ]
     })
