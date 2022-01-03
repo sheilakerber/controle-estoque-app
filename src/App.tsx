@@ -16,41 +16,25 @@ export function App() {
   const [isRegisterProductModalOpen, setIsRegisterProductModalOpen] =
     useState(false);
 
-  function handleOpenRegisterProductModal() {
-    setIsRegisterProductModalOpen(true);
-  }
-
-  function handleCloseRegisterProductModal() {
-    setIsRegisterProductModalOpen(false);
-  }
-
   // modal EDITAR PRODUTO
   const [isNewEditProductModalOpen, setIsNewEditProductModalOpen] =
     useState(false);
-
-  function handleOpenEditProductModal() {
-    setIsNewEditProductModalOpen(true);
-  }
-
-  function handleCloseEditProductModal() {
-    setIsNewEditProductModalOpen(false);
-  }
 
   return (
     <ProductsProvider>
       <Header />
       <Dashboard />
       <ProductManager
-        onOpenRegisterProductModal={handleOpenRegisterProductModal}
-        onOpenEditProductModal={handleOpenEditProductModal}
+        onOpenRegisterProductModal={() => setIsRegisterProductModalOpen(true)}
+        onOpenEditProductModal={() => setIsNewEditProductModalOpen(true)}
       />
       <NewRegisterProductModal
         isOpen={isRegisterProductModalOpen}
-        onRequestClose={handleCloseRegisterProductModal}
+        onRequestClose={() => setIsRegisterProductModalOpen(false)}
       />
       <NewEditProductModal
         isOpen={isNewEditProductModalOpen}
-        onRequestClose={handleCloseEditProductModal}
+        onRequestClose={() => setIsNewEditProductModalOpen(false)}
       />
       <GlobalStyle />
     </ProductsProvider>
