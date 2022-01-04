@@ -44,6 +44,7 @@ export function App() {
       <NewEditProductModal
         isOpen={isNewEditProductModalOpen}
         onRequestClose={() => setIsNewEditProductModalOpen(false)}
+        selectedProduct={selectedProduct}
       />
       <GlobalStyle />
     </ProductsProvider>
