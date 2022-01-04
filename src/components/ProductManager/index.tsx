@@ -4,28 +4,45 @@ import editProductImg from "../../assets/edit.png";
 import registerProductImg from "../../assets/newProduct.png";
 import lowStockImg from "../../assets/danger.jpg";
 import { ProductsContext } from "../../ProductsContext";
+import { Product } from "../../interfaces/Product";
 
 interface ProductManagerProps {
   onOpenRegisterProductModal: () => void;
   onOpenEditProductModal: () => void;
+  onProductSelected: (product: Product) => void;
 }
 
 export function ProductManager({
-    onOpenRegisterProductModal,
-    onOpenEditProductModal,
-  }: ProductManagerProps) {
-  
-  const context = useContext(ProductsContext)  
+  onOpenRegisterProductModal,
+  onOpenEditProductModal,
+  onProductSelected,
+}: ProductManagerProps) {
+  const context = useContext(ProductsContext);
+
+  const handleProductSelect = (event: any) => {
+    const selectedProductName = event.target.value;
+
+    if (context) {
+      const { products } = context;
+      const result = products.filter(
+        (eachProduct) => eachProduct.productName === selectedProductName
+      );
+
+      if (result.length > 0) {
+        onProductSelected(result[0]);
+      }
+    }
+  };
 
   return (
     <Container>
       <div>
         <div className="selectProdut">
           <h1>Selecione o produto desejado</h1>
-          <select id="productsDropdown">
+          <select id="productsDropdown" onChange={handleProductSelect}>
             {context?.products.map((item) => (
               <option value={item.productName} key={item.id}>
-                {item.productName}          
+                {item.productName}
               </option>
             ))}
           </select>
@@ -61,5 +78,5 @@ export function ProductManager({
         </div>
       </div>
     </Container>
-  )
+  );
 }

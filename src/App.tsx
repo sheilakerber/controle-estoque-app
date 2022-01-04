@@ -8,6 +8,7 @@ import { useState } from "react";
 import { NewRegisterProductModal } from "./components/NewRegisterProductModal";
 import { NewEditProductModal } from "./components/NewEditProductModal";
 import { ProductsProvider } from "./ProductsContext";
+import { Product } from "./interfaces/Product";
 
 Modal.setAppElement("#root");
 
@@ -20,13 +21,21 @@ export function App() {
   const [isNewEditProductModalOpen, setIsNewEditProductModalOpen] =
     useState(false);
 
+  // estado para salvar o produto selecionado
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>();
+
   return (
     <ProductsProvider>
       <Header />
-      <Dashboard />
+      <Dashboard selectedProduct={selectedProduct} />
       <ProductManager
         onOpenRegisterProductModal={() => setIsRegisterProductModalOpen(true)}
         onOpenEditProductModal={() => setIsNewEditProductModalOpen(true)}
+        // ao passar o set do estado diretamente,
+        // o React entende que o setSelectedProduct ira ser chamado com um produto e 
+        // vai setar esse produto no estado acima, ex: 
+        // onProductSelected={(product: Product) => setSelectedProduct(product)}
+        onProductSelected={setSelectedProduct}
       />
       <NewRegisterProductModal
         isOpen={isRegisterProductModalOpen}
