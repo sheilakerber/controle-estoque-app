@@ -1,7 +1,6 @@
 import Modal from "react-modal";
 import { Container } from "./styles";
 import saveImg from "../../assets/save.jpg";
-//import cancelImg from "../../assets/cancel.jpg";
 import closeImg from "../../assets/close.svg";
 import { FormEvent, useContext, useState } from "react";
 import { ProductsContext } from "../../ProductsContext";
@@ -30,8 +29,7 @@ export function NewRegisterProductModal({
     event.preventDefault();
 
     if (context) {
-            
-      if (incomeQuantity && outcomeQuantity && balanceQuantity ) {
+      if (incomeQuantity && outcomeQuantity && balanceQuantity) {
         const newProductObject = {
           id: Math.floor(Math.random() * 10000),
           productName,
@@ -44,7 +42,6 @@ export function NewRegisterProductModal({
 
         context.setProducts(newProducts);
       }
-
     }
     onRequestClose();
   }
