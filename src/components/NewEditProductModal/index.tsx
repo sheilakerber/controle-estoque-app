@@ -4,7 +4,7 @@ import saveImg from "../../assets/save.jpg";
 import cancelImg from "../../assets/cancel.jpg";
 import deleteImg from "../../assets/delete.png";
 import closeImg from "../../assets/close.svg";
-import { useContext } from "react";
+import { FormEvent, useContext } from "react";
 import { ProductsContext } from "../../ProductsContext";
 import { Product } from "../../interfaces/Product";
 import { useEffect, useState } from "react";
@@ -23,9 +23,9 @@ export function NewEditProductModal({
   const context = useContext(ProductsContext);
 
   let productName = "Produto nao selecionado";
-  let income = 200;
+  let income = 0;
   let outcome = 0;
-  
+
   if (selectedProduct) {
     productName = selectedProduct.productName;
     income = selectedProduct.incomeQuantity;
@@ -41,7 +41,30 @@ export function NewEditProductModal({
     setOutcomeEdition(outcome);
   }, [income, outcome]);
 
-  const balance = incomeEdition - outcomeEdition
+  const balance = incomeEdition - outcomeEdition;
+
+  const handleSave = (event: FormEvent) => {
+    event.preventDefault();
+
+    if (context && selectedProduct) {
+      const newProduct = {
+        id: selectedProduct.id,
+        productName: selectedProduct.productName,
+        incomeQuantity: incomeEdition,
+        outcomeQuantity: outcomeEdition,
+        balanceQuantity: balance,
+      };
+
+      const { products, setProducts } = context;
+      const newProducts = products.filter(
+        (eachProduct) => eachProduct.id !== selectedProduct.id
+      );
+      newProducts.push(newProduct);
+
+      setProducts(newProducts);
+      onRequestClose();
+    }
+  };
 
   return (
     <Modal
@@ -81,11 +104,11 @@ export function NewEditProductModal({
             />{" "}
             <br />
             <h3>Total em estoque</h3>
-            <input value={balance}  disabled /> <br />
+            <input value={balance} disabled /> <br />
           </div>
 
           <div className="productEdition buttonsEdition">
-            <button type="submit" id="saveEditionButton">
+            <button type="submit" id="saveEditionButton" onClick={handleSave}>
               <img src={saveImg} alt="" />
               Salvar
             </button>
