@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container } from "./styles";
 import editProductImg from "../../assets/edit.png";
 import registerProductImg from "../../assets/newProduct.png";
-import lowStockImg from "../../assets/danger.jpg";
 import { ProductsContext } from "../../ProductsContext";
 import { Product } from "../../interfaces/Product";
+import { LowStockViewer } from "../LowStockViewer";
 
 interface ProductManagerProps {
   onOpenRegisterProductModal: () => void;
@@ -57,26 +57,8 @@ export function ProductManager({
             <img src={registerProductImg} alt="Imagem para Editar Produto" />
           </button>
         </div>
-
-        <div className="lowStockProducts">
-          <section className="lowStockTitle">
-            <main>
-              <h1>Produtos com estoque baixo</h1>
-              <strong>(Quantidade abaixo de 30 unidades.)</strong>
-            </main>
-            <img src={lowStockImg} alt="" />
-          </section>
-
-          <section className="lowStockSelection">
-            <select name="" id="productsDropdown">
-              <option value="">Feijão 1Kg</option>
-              <option value="">Leite 1L</option>
-            </select>
-
-            <p>Em estoque: x unidades</p>
-          </section>
-        </div>
       </div>
+      <LowStockViewer />
     </Container>
   );
 }
