@@ -55,12 +55,33 @@ export function NewEditProductModal({
         balanceQuantity: balance,
       };
 
+      if (newProduct.balanceQuantity < 0) {
+        alert(
+          "ATENÇÃO: A quantidade de saídas não pode ser maior que a quantidade de entradas!"
+        );
+        return;
+      } else {
+        const { products, setProducts } = context;
+        const newProducts = products.filter(
+          (eachProduct) => eachProduct.id !== selectedProduct.id
+        );
+        newProducts.push(newProduct);
+
+        setProducts(newProducts);
+
+        onRequestClose();
+      }
+    }
+  };
+
+  const handleDelete = (event: FormEvent) => {
+    event.preventDefault();
+
+    if (context && selectedProduct) {
       const { products, setProducts } = context;
       const newProducts = products.filter(
         (eachProduct) => eachProduct.id !== selectedProduct.id
       );
-      newProducts.push(newProduct);
-
       setProducts(newProducts);
       onRequestClose();
     }
@@ -113,12 +134,20 @@ export function NewEditProductModal({
               Salvar
             </button>
 
-            <button type="submit" id="cancelEditionButton">
+            <button
+              type="submit"
+              id="cancelEditionButton"
+              onClick={onRequestClose}
+            >
               <img src={cancelImg} alt="" />
               Cancelar
             </button>
 
-            <button type="submit" id="deleteEditionButton">
+            <button
+              type="submit"
+              id="deleteEditionButton"
+              onClick={handleDelete}
+            >
               <img src={deleteImg} alt="" />
               Excluir
             </button>

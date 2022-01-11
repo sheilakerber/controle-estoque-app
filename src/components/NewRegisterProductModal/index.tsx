@@ -38,12 +38,18 @@ export function NewRegisterProductModal({
           balanceQuantity,
         };
 
-        const newProducts = [...context.products, newProductObject];
-
-        context.setProducts(newProducts);
+        if (newProductObject.balanceQuantity < 0) {
+          alert(
+            "ATENÇÃO: A quantidade de saídas não pode ser maior que a quantidade de entradas!"
+          );
+          return;
+        } else {
+          const newProducts = [...context.products, newProductObject];
+          context.setProducts(newProducts);
+          onRequestClose();
+        }
       }
     }
-    onRequestClose();
   }
 
   return (
