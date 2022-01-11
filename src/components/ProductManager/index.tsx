@@ -5,6 +5,7 @@ import registerProductImg from "../../assets/newProduct.png";
 import { ProductsContext } from "../../ProductsContext";
 import { Product } from "../../interfaces/Product";
 import { LowStockViewer } from "../LowStockViewer";
+import { CommonSelect } from "../common/Select";
 
 interface ProductManagerProps {
   onOpenRegisterProductModal: () => void;
@@ -36,29 +37,24 @@ export function ProductManager({
 
   return (
     <Container>
-      <div>
-        <div className="selectProdut">
-          <h1>Selecione o produto desejado</h1>
-          <select id="productsDropdown" onChange={handleProductSelect}>
-            {context?.products.map((item) => (
-              <option value={item.productName} key={item.id}>
-                {item.productName}
-              </option>
-            ))}
-          </select>
+      <h1>Selecione o produto desejado</h1>
+      <CommonSelect id="productsDropdown" onChange={handleProductSelect}>
+        {context?.products.map((item) => (
+          <option value={item.productName} key={item.id}>
+            {item.productName}
+          </option>
+        ))}
+      </CommonSelect>
 
-          <button type="button" onClick={onOpenEditProductModal}>
-            <h2>Editar produto</h2>
-            <img src={editProductImg} alt="Imagem para Editar Produto" />
-          </button>
+      <button type="button" onClick={onOpenEditProductModal}>
+        <h2>Editar produto</h2>
+        <img src={editProductImg} alt="Imagem para Editar Produto" />
+      </button>
 
-          <button type="button" onClick={onOpenRegisterProductModal}>
-            <h2>Cadastar produto</h2>
-            <img src={registerProductImg} alt="Imagem para Editar Produto" />
-          </button>
-        </div>
-      </div>
-      
+      <button type="button" onClick={onOpenRegisterProductModal}>
+        <h2>Cadastar produto</h2>
+        <img src={registerProductImg} alt="Imagem para Editar Produto" />
+      </button>
     </Container>
   );
 }

@@ -83,7 +83,8 @@ button {
 
 .mainContent {
     display: flex;  
-    margin-left: 12rem;
-    margin-right: 12rem;
+    align-items: center;
+    justify-content: space-around;
+    padding: 1rem;
 }
-`
+`;

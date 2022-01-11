@@ -3,6 +3,7 @@ import inImg from "../../assets/in.jpg";
 import outImg from "../../assets/out.jpg";
 import stockImg from "../../assets/icon.jpg";
 import { Product } from "../../interfaces/Product";
+import { DashboardSection } from "../common/Select";
 
 interface DashboardProps {
   selectedProduct: Product | undefined;
@@ -29,29 +30,29 @@ export function Dashboard({ selectedProduct }: DashboardProps) {
       <h1>{name}</h1>
 
       <div className="dashboardDiv">
-        <section className="infosProduct">
+        <DashboardSection>
           <header>
             <h2>Entradas</h2>
             <img src={inImg} alt="Icone de entrada" />
           </header>
           <strong>{income}</strong>
-        </section>
+        </DashboardSection>
 
-        <section className="infosProduct">
+        <DashboardSection>
           <header>
             <h2>Saídas</h2>
             <img src={outImg} alt="Icone de entrada" />
           </header>
           <strong>{outcome}</strong>
-        </section>
+        </DashboardSection>
 
-        <section className="infosProduct">
+        <DashboardSection>
           <header>
             <h2>Total em estoque</h2>
             <img src={stockImg} alt="Icone de entrada" />
           </header>
           <strong>{balance}</strong>
-        </section>
+        </DashboardSection>
       </div>
     </Container>
   );

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import lowStockImg from "../../assets/danger.jpg";
 import { Product } from "../../interfaces/Product";
 import { ProductsContext } from "../../ProductsContext";
+import { CommonSelect } from "../common/Select";
 import { Container } from "./styles";
 
 export function LowStockViewer() {
@@ -30,7 +31,7 @@ export function LowStockViewer() {
 
   return (
     <Container>
-      <div className="lowStockProducts">
+      <div>
         <section className="lowStockTitle">
           <main>
             <h1>Produtos com estoque baixo</h1>
@@ -40,13 +41,13 @@ export function LowStockViewer() {
         </section>
 
         <section className="lowStockSelection">
-          <select id="productsDropdown" onChange={handleLowStockSelected}>
+          <CommonSelect onChange={handleLowStockSelected}>
             {lowStockItems.map((item) => (
               <option value={item.productName} key={item.id}>
                 {item.productName}
               </option>
             ))}
-          </select>
+          </CommonSelect>
 
           <p>Em estoque: {selectedLowItem?.balanceQuantity} </p>
         </section>
