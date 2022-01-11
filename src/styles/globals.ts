@@ -81,4 +81,9 @@ button {
     }
 }
 
+.mainContent {
+    display: flex;  
+    margin-left: 12rem;
+    margin-right: 12rem;
+}
 `

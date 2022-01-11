@@ -58,7 +58,7 @@ export function ProductManager({
           </button>
         </div>
       </div>
-      <LowStockViewer />
+      
     </Container>
   );
 }

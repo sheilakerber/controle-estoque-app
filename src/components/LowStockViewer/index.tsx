@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import lowStockImg from "../../assets/danger.jpg";
 import { Product } from "../../interfaces/Product";
 import { ProductsContext } from "../../ProductsContext";
+import { Container } from "./styles";
 
 export function LowStockViewer() {
   const [selectedLowItem, setSelectedLowItem] = useState<Product | undefined>();
@@ -28,26 +29,28 @@ export function LowStockViewer() {
   }, [lowStockItems]);
 
   return (
-    <div className="lowStockProducts">
-      <section className="lowStockTitle">
-        <main>
-          <h1>Produtos com estoque baixo</h1>
-          <strong>(Quantidade abaixo de 30 unidades.)</strong>
-        </main>
-        <img src={lowStockImg} />
-      </section>
+    <Container>
+      <div className="lowStockProducts">
+        <section className="lowStockTitle">
+          <main>
+            <h1>Produtos com estoque baixo</h1>
+            <strong>(Quantidade abaixo de 30 unidades.)</strong>
+          </main>
+          <img src={lowStockImg} />
+        </section>
 
-      <section className="lowStockSelection">
-        <select id="productsDropdown" onChange={handleLowStockSelected}>
-          {lowStockItems.map((item) => (
-            <option value={item.productName} key={item.id}>
-              {item.productName}
-            </option>
-          ))}
-        </select>
+        <section className="lowStockSelection">
+          <select id="productsDropdown" onChange={handleLowStockSelected}>
+            {lowStockItems.map((item) => (
+              <option value={item.productName} key={item.id}>
+                {item.productName}
+              </option>
+            ))}
+          </select>
 
-        <p>Em estoque: {selectedLowItem?.balanceQuantity} </p>
-      </section>
-    </div>
+          <p>Em estoque: {selectedLowItem?.balanceQuantity} </p>
+        </section>
+      </div>
+    </Container>
   );
 }

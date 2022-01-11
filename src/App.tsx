@@ -9,6 +9,7 @@ import { NewRegisterProductModal } from "./components/NewRegisterProductModal";
 import { NewEditProductModal } from "./components/NewEditProductModal";
 import { ProductsProvider } from "./ProductsContext";
 import { Product } from "./interfaces/Product";
+import { LowStockViewer } from "./components/LowStockViewer";
 
 Modal.setAppElement("#root");
 
@@ -28,15 +29,18 @@ export function App() {
     <ProductsProvider>
       <Header />
       <Dashboard selectedProduct={selectedProduct} />
-      <ProductManager
-        onOpenRegisterProductModal={() => setIsRegisterProductModalOpen(true)}
-        onOpenEditProductModal={() => setIsNewEditProductModalOpen(true)}
-        // ao passar o set do estado diretamente,
-        // o React entende que o setSelectedProduct ira ser chamado com um produto e 
-        // vai setar esse produto no estado acima, ex: 
-        // onProductSelected={(product: Product) => setSelectedProduct(product)}
-        onProductSelected={setSelectedProduct}
-      />
+      <div className="mainContent">
+        <ProductManager
+          onOpenRegisterProductModal={() => setIsRegisterProductModalOpen(true)}
+          onOpenEditProductModal={() => setIsNewEditProductModalOpen(true)}
+          // ao passar o set do estado diretamente,
+          // o React entende que o setSelectedProduct ira ser chamado com um produto e
+          // vai setar esse produto no estado acima, ex:
+          // onProductSelected={(product: Product) => setSelectedProduct(product)}
+          onProductSelected={setSelectedProduct}
+        />
+        <LowStockViewer />
+      </div>
       <NewRegisterProductModal
         isOpen={isRegisterProductModalOpen}
         onRequestClose={() => setIsRegisterProductModalOpen(false)}

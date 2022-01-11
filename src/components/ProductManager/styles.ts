@@ -20,6 +20,7 @@ export const Container = styled.div`
     }
 
     .selectProdut {
+        width: 120%;
         background: var(--lightPurple);
         display: block;
         border: 1px solid var(--darkPurple);
@@ -66,49 +67,5 @@ export const Container = styled.div`
         }
     }
 
-    .lowStockProducts {
-        display: block;
-        width: 100%;
-        background: var(--background);
-        border: 1px solid red;
-
-        .lowStockTitle {
-            display: flex;
-            text-align: center;
-            justify-content: space-between;
-            align-items: center;
-            margin: 3% 15%;
-
-            img {
-                width: 20%;
-            }
-
-            h1 {
-                color: #D91313;
-                font-weight: normal;
-            }
-            strong {
-                color: #D9131354;
-                font-weight: lighter;
-            }
-        }
-
-        .lowStockSelection {
-            display: flex;
-            text-align: center;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0 20%;
-
-            select, p {
-                //background: var(--background);
-                border: 1px solid #D3D3D3;
-                padding: 1% 7%;
-                color: gray;
-                border-radius: 0.7rem;
-                font-weight: normal;
-                font-size: 1rem;   
-            }
-        }
-    }
+    
 `
